@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHA | Luxury Global Sourcing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+Arabic:wght@300;700;900&display=swap');
+        body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #fafafa; }
+        .brand-font { font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); }
+    </style>
+</head>
+<body class="text-stone-900 overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="glass-nav sticky top-0 z-50 border-b border-stone-100 py-6 px-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="brand-font text-3xl font-bold tracking-tighter">MAHA</div>
+            <div class="flex items-center gap-6">
+                <nav class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-widest text-stone-400">
+                    <a href="#" class="hover:text-black transition">الرئيسية</a>
+                    <a href="#collection" class="text-black">التشكيلة</a>
+                    <a href="https://wa.me/34632684017" class="hover:text-black transition">طلب خاص</a>
+                </nav>
+                <div class="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center">
+                    <i class="fas fa-shopping-bag text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-[80vh] flex items-center px-10 md:px-20 relative">
+        <div class="max-w-3xl z-10">
+            <h5 class="text-[11px] font-black uppercase tracking-[0.5em] text-stone-500 mb-6">Maha Global Operations</h5>
+            <h1 class="brand-font text-6xl md:text-8xl leading-none mb-10 text-stone-900">Elite <br><span class="italic text-stone-400 underline decoration-stone-200">Sourcing</span></h1>
+            <p class="text-stone-600 text-lg leading-relaxed mb-12 max-w-md">أناقة أطفالكِ تبدأ من المصدر. نربطكِ مباشرة بأرقى مصانع الموضة في إسبانيا وتركيا لضمان الجودة والسعر.</p>
+            <a href="#collection" class="bg-stone-900 text-white px-14 py-5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl hover:bg-stone-800 transition">استكشفي الآن</a>
+        </div>
+        <div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-10 flex items-center justify-center hidden lg:flex">
+             <i class="fas fa-globe-europe text-[30rem]"></i>
+        </div>
+    </section>
+
+    <!-- Collection -->
+    <section id="collection" class="py-32 px-10 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-20 border-b pb-10">
+            <h2 class="brand-font text-4xl italic">Direct From Factory</h2>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">مجموعة خريف/شتاء 2024</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
+            <!-- Product 1 -->
+            <div class="group">
+                <div class="aspect-[3/4] bg-white rounded-[3rem] border border-stone-100 relative overflow-hidden flex items-center justify-center shadow-sm hover:shadow-xl transition-all duration-500">
+                    <i class="fas fa-crown text-stone-50 text-9xl group-hover:scale-110 transition duration-700"></i>
+                    <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition flex items-end p-8">
+                        <button onclick="window.location.href='https://wa.me/34632684017?text=أريد الاستفسار عن فستان المناسبات الفاخر'" class="w-full bg-stone-900 text-white py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest shadow-2xl">طلب عبر الواتساب</button>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-between items-start px-4">
+                    <div>
+                        <h4 class="text-sm font-black mb-1">فستان المناسبات الفاخر</h4>
+                        <p class="text-[9px] text-stone-400 font-bold uppercase">Imported from Turkey</p>
+                    </div>
+                    <span class="font-black text-xl">130€</span>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="group">
+                <div class="aspect-[3/4] bg-white rounded-[3rem] border border-stone-100 relative overflow-hidden flex items-center justify-center shadow-sm hover:shadow-xl transition-all duration-500">
+                    <i class="fas fa-award text-stone-50 text-9xl group-hover:scale-110 transition duration-700"></i>
+                    <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition flex items-end p-8">
+                        <button onclick="window.location.href='https://wa.me/34632684017?text=أريد الاستفسار عن الطقم الملكي للأطفال'" class="w-full bg-stone-900 text-white py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest shadow-2xl">طلب عبر الواتساب</button>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-between items-start px-4">
+                    <div>
+                        <h4 class="text-sm font-black mb-1">طقم "مها" الملكي</h4>
+                        <p class="text-[9px] text-stone-400 font-bold uppercase">Spanish Design</p>
+                    </div>
+                    <span class="font-black text-xl">95€</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-32 px-10 border-t border-stone-100">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-20">
+            <div>
+                <div class="brand-font text-3xl font-black mb-8 italic text-stone-900">MAHA</div>
+                <p class="text-[10px] text-stone-400 leading-loose uppercase font-bold tracking-tight">نحن المسؤولون تقنياً وإدارياً عن رحلة القطعة من المصنع إلى يدكِ. جودة نثق بها، وأناقة يستحقها طفلك.</p>
+            </div>
+            <div>
+                <h5 class="text-[11px] font-black uppercase tracking-[0.3em] mb-10">التواصل الإداري</h5>
+                <p class="text-[10px] text-stone-500 leading-relaxed font-bold uppercase">
+                    Madrid, Spain<br>
+                    Global Logistics Division<br>
+                    <span class="text-stone-900 block mt-4">contact@maha-store.com</span>
+                </p>
+            </div>
+            <div>
+                <h5 class="text-[11px] font-black uppercase tracking-[0.3em] mb-10">حالة الشحن</h5>
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100 flex items-center gap-4">
+                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span class="text-[10px] font-black uppercase">جميع المصانع في تركيا وإسبانيا تعمل الآن</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-20 pt-10 border-t border-stone-50 text-center">
+            <p class="text-[8px] font-black text-stone-300 uppercase tracking-[0.5em]">&copy; 2024 MAHA GLOBAL SUPPLY CHAIN MGMT.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
