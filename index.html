@@ -1,95 +1,246 @@
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-accent mb-6">مها ستور</h2>
-            <div class="flex justify-center gap-8 mb-8 text-sm opacity-70">
-                <a href="#" class="hover:text-white transition">سياسة الاستبدال</a>
-                <a href="#" class="hover:text-white transition">الشحن والتوصيل</a>
-                <a href="#" class="hover:text-white transition">تواصل معنا</a>
-            </div>
-            <p class="text-xs opacity-40">جميع الحقوق محفوظة © 2026 - تم التطوير لـ مها ستور</p>
-        </div>
-    </footer>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maha Store Global | متجر مها العالمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --main-pink: #db2777; --bg-gray: #f9fafb; }
+        body { font-family: 'Cairo', sans-serif; transition: all 0.3s ease; }
+        .ltr { font-family: 'Poppins', sans-serif; direction: ltr; text-align: left; }
+        .rtl { font-family: 'Cairo', sans-serif; direction: rtl; text-align: right; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .gradient-gold { background: linear-gradient(135deg, #d4af37 0%, #f9f295 50%, #d4af37 100%); }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50">
 
-    <!-- Cart Modal (Simple UI) -->
-    <div id="cartModal" class="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4 hidden">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">سلة المشتريات</h3>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-            </div>
-            <div id="cartItemsList" class="space-y-4 max-h-60 overflow-y-auto mb-6">
-                <p class="text-center text-gray-500 py-4">السلة فارغة حالياً</p>
-            </div>
-            <div class="border-t pt-4">
-                <div class="flex justify-between font-bold text-lg mb-6">
-                    <span>الإجمالي:</span>
-                    <span id="cartTotal">0 ر.س</span>
-                </div>
-                <button onclick="alert('سيتم ربط بوابة الدفع قريباً!')" class="w-full btn-accent text-white py-4 rounded-xl font-bold shadow-lg transition">إتمام الطلب</button>
-            </div>
+    <!-- Language & Currency Switcher -->
+    <div class="bg-gray-900 text-white text-[10px] py-1 px-4 flex justify-between items-center">
+        <div class="flex gap-3">
+            <button onclick="setLanguage('ar')" class="hover:text-pink-400">العربية</button>
+            <button onclick="setLanguage('en')" class="hover:text-pink-400">English</button>
+            <button onclick="setLanguage('fr')" class="hover:text-pink-400">Français</button>
+            <button onclick="setLanguage('es')" class="hover:text-pink-400">Español</button>
+            <button onclick="setLanguage('de')" class="hover:text-pink-400">Deutsch</button>
         </div>
+        <div class="hidden sm:block opacity-70">Global Shipping Available 🌍</div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- Main Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-pink-100 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold text-pink-600 tracking-tighter" id="storeName">مها ستور</div>
+        <div class="flex items-center gap-5">
+            <div class="hidden md:flex gap-6 text-sm font-semibold">
+                <a href="#products" class="hover:text-pink-600 transition" id="navProducts">المنتجات</a>
+                <a href="#warranty" class="hover:text-pink-600 transition" id="navWarranty">الضمان</a>
+                <a href="#pozon" class="hover:text-pink-600 transition" id="navPozon">الأرباح</a>
+            </div>
+            <button onclick="openCart()" class="relative p-2 bg-pink-50 rounded-full text-pink-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-width="2"/>
+                </svg>
+                <span id="cartBadge" class="absolute -top-1 -right-1 bg-pink-600 text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Global Guarantee Banner -->
+    <div id="warranty" class="bg-red-600 text-white text-center py-2 text-xs font-bold animate-pulse">
+        🛡️ <span id="warrantyTxt">ضمان استرداد الأموال للبضائع التالفة 100% | Full Refund for Damaged Goods</span>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative py-20 px-6 bg-gradient-to-b from-pink-50 to-white overflow-hidden">
+        <div class="container mx-auto flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 text-center md:text-right">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight" id="heroTitle">تألقي مع موضة مها العالمية</h1>
+                <p class="text-lg text-gray-600 mb-8" id="heroSub">منتجات مختارة من كبرى المصانع العالمية بضمان الجودة.</p>
+                <button class="bg-pink-600 text-white px-10 py-4 rounded-2xl font-bold shadow-xl hover:bg-pink-700 transition" id="heroBtn">تسوقي الآن</button>
+            </div>
+            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
+                <div class="w-72 h-72 bg-pink-200 rounded-full blur-3xl absolute opacity-30"></div>
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800" class="rounded-3xl shadow-2xl w-full max-w-sm relative z-10" alt="Fashion Image">
+            </div>
+        </div>
+    </header>
+
+    <!-- Products Grid -->
+    <section id="products" class="container mx-auto px-6 py-20">
+        <h2 class="text-3xl font-bold text-center mb-16" id="secTitle">أحدث المنتجات الدولية</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1 -->
+            <div class="bg-white rounded-3xl p-4 shadow-sm hover:shadow-2xl transition border border-gray-100 group">
+                <div class="relative overflow-hidden rounded-2xl mb-4">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=400" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute top-2 right-2 bg-black text-white px-3 py-1 rounded-full text-[10px]">PREMIUM</div>
+                </div>
+                <h3 class="font-bold text-lg">فستان كلاسيكي</h3>
+                <p class="text-pink-600 font-bold text-xl my-2">120 USD</p>
+                <button onclick="addToCart('فستان كلاسيكي', 120)" class="w-full bg-gray-900 text-white py-3 rounded-xl hover:bg-pink-600 transition font-bold" id="addBtn">إضافة للسلة</button>
+            </div>
+            <!-- More products can be added here -->
+        </div>
+    </section>
+
+    <!-- Pozon Profit & Factory Section -->
+    <section id="pozon" class="container mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Payout Card -->
+            <div class="gradient-gold p-8 rounded-3xl shadow-lg border border-yellow-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4" id="pozonTitle">محفظة الأرباح (Pozon)</h3>
+                <p class="text-sm text-gray-700 mb-6" id="pozonSub">يتم تحويل الأرباح مباشرة إلى حسابك في بوزون برقم الحساب الموحد.</p>
+                <div class="bg-white/50 p-4 rounded-xl border border-white mb-6">
+                    <span class="text-xs block text-gray-500">POZON ID:</span>
+                    <span class="text-lg font-mono font-bold tracking-widest">MAHA-ACC-GLOBAL-2026</span>
+                </div>
+                <button onclick="payout()" class="w-full bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-gray-800 transition shadow-lg">سحب الأرباح التراكمية</button>
+            </div>
+            <!-- Sourcing Card -->
+            <div class="bg-gray-900 text-white p-8 rounded-3xl shadow-xl">
+                <h3 class="text-2xl font-bold mb-4" id="sourceTitle">طلب بضائع من المصانع</h3>
+                <p class="text-gray-400 text-sm mb-6" id="sourceSub">اطلب الكميات بالجملة مباشرة من المصانع الشريكة في تركيا وفرنسا.</p>
+                <div class="space-y-4">
+                    <select class="w-full bg-gray-800 border-none p-4 rounded-xl text-sm outline-none">
+                        <option>مصنع النسيج التركي (Istanbul)</option>
+                        <option>شركة الإكسسوارات الفرنسية (Paris)</option>
+                    </select>
+                    <button class="w-full bg-pink-600 py-4 rounded-2xl font-bold hover:bg-pink-700 transition">إرسال طلب استيراد</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot Bot -->
+    <div id="botUI" class="fixed bottom-6 left-6 z-[100] w-80 bg-white rounded-3xl shadow-2xl border border-pink-100 overflow-hidden hidden">
+        <div class="bg-pink-600 p-4 text-white flex justify-between items-center">
+            <span class="font-bold flex items-center gap-2">🤖 Maha AI Bot</span>
+            <button onclick="toggleBot()">✕</button>
+        </div>
+        <div id="chatMessages" class="h-64 overflow-y-auto p-4 space-y-3 text-xs scroll-hide bg-gray-50">
+            <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100">أهلاً بكِ في مها ستور! كيف يمكنني مساعدتكِ في الطلب اليوم؟</div>
+        </div>
+        <div class="p-3 bg-white flex gap-2">
+            <input id="chatInput" type="text" placeholder="اكتبي سؤالك..." class="flex-1 bg-gray-100 p-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-pink-500">
+            <button onclick="sendMessage()" class="bg-pink-600 text-white p-3 rounded-xl italic">Go</button>
+        </div>
+    </div>
+    <button onclick="toggleBot()" class="fixed bottom-6 left-6 bg-pink-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition z-[99] animate-bounce">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-width="2"/></svg>
+    </button>
+
     <script>
-        let cart = [];
-        const cartCount = document.getElementById('cartCount');
-        const cartItemsList = document.getElementById('cartItemsList');
-        const cartTotal = document.getElementById('cartTotal');
-        const cartModal = document.getElementById('cartModal');
-        const cartBtn = document.getElementById('cartBtn');
+        // --- Multilingual Logic ---
+        const i18n = {
+            ar: {
+                store: "مها ستور", nav1: "المنتجات", nav2: "الضمان", nav3: "الأرباح",
+                h1: "تألقي مع موضة مها العالمية", sub: "منتجات مختارة من كبرى المصانع العالمية بضمان الجودة.",
+                btn: "تسوقي الآن", warranty: "ضمان استرداد الأموال للبضائع التالفة 100%",
+                sec: "أحدث المنتجات الدولية", pozon: "محفظة الأرباح (Pozon)", pSub: "يتم تحويل الأرباح مباشرة إلى حسابك في بوزون.",
+                source: "طلب بضائع من المصانع", sSub: "اطلب الكميات بالجملة مباشرة من المصانع الشريكة.",
+                add: "إضافة للسلة"
+            },
+            en: {
+                store: "Maha Store", nav1: "Products", nav2: "Warranty", nav3: "Payouts",
+                h1: "Shine with Maha Global Fashion", sub: "Handpicked products from top global factories with quality assurance.",
+                btn: "Shop Now", warranty: "100% Money-back Guarantee for Damaged Items",
+                sec: "Latest Global Products", pozon: "Profit Wallet (Pozon)", pSub: "Profits are transferred directly to your Pozon account.",
+                source: "Factory Sourcing", sSub: "Order wholesale quantities directly from partner factories.",
+                add: "Add to Cart"
+            },
+            fr: {
+                store: "Boutique Maha", nav1: "Produits", nav2: "Garantie", nav3: "Paiements",
+                h1: "Brillez avec Maha Global Mode", sub: "Produits sélectionnés des meilleures usines avec assurance qualité.",
+                btn: "Acheter maintenant", warranty: "Garantie de remboursement 100% pour articles endommagés",
+                sec: "Derniers Produits Mondiaux", pozon: "Portefeuille de Profits", pSub: "Les bénéfices sont transférés sur votre compte Pozon.",
+                source: "Sourcing d'usine", sSub: "Commandez en gros directement auprès des usines partenaires.",
+                add: "Ajouter"
+            },
+            es: {
+                store: "Tienda Maha", nav1: "Productos", nav2: "Garantía", nav3: "Pagos",
+                h1: "Brilla con la Moda Global de Maha", sub: "Productos seleccionados de las mejores fábricas con garantía de calidad.",
+                btn: "Comprar Ahora", warranty: "Garantía de devolución del 100% por artículos dañados",
+                sec: "Últimos Productos Globales", pozon: "Cartera de Ganancias", pSub: "Las ganancias se transfieren directamente a su cuenta Pozon.",
+                source: "Abastecimiento de Fábrica", sSub: "Pida cantidades al por mayor directamente de las fábricas.",
+                add: "Añadir"
+            },
+            de: {
+                store: "Maha Laden", nav1: "Produkte", nav2: "Garantie", nav3: "Auszahlung",
+                h1: "Glänzen Sie mit Maha Global Fashion", sub: "Handverlesene Produkte aus Top-Fabriken mit Qualitätssicherung.",
+                btn: "Jetzt Kaufen", warranty: "100% Geld-zurück-Garantie bei beschädigter Ware",
+                sec: "Neueste globale Produkte", pozon: "Profit-Brieftasche", pSub: "Gewinne werden direkt auf Ihr Pozon-Konto überwiesen.",
+                source: "Fabrik-Beschaffung", sSub: "Großhandelsmengen direkt bei Partnerfabriken bestellen.",
+                add: "Hinzufügen"
+            }
+        };
 
-        function toggleCart() {
-            cartModal.classList.toggle('hidden');
-        }
-
-        cartBtn.addEventListener('click', toggleCart);
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCartUI();
+        function setLanguage(lang) {
+            const doc = document.getElementById('mainHtml');
+            const data = i18n[lang];
             
-            // Notification effect
-            const btn = event.currentTarget;
-            btn.innerHTML = '✓';
-            setTimeout(() => {
-                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>';
-            }, 1000);
+            doc.lang = lang;
+            doc.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            document.body.className = (lang === 'ar') ? 'bg-gray-50 rtl' : 'bg-gray-50 ltr';
+
+            document.getElementById('storeName').innerText = data.store;
+            document.getElementById('navProducts').innerText = data.nav1;
+            document.getElementById('navWarranty').innerText = data.nav2;
+            document.getElementById('navPozon').innerText = data.nav3;
+            document.getElementById('heroTitle').innerText = data.h1;
+            document.getElementById('heroSub').innerText = data.sub;
+            document.getElementById('heroBtn').innerText = data.btn;
+            document.getElementById('warrantyTxt').innerText = data.warranty;
+            document.getElementById('secTitle').innerText = data.sec;
+            document.getElementById('pozonTitle').innerText = data.pozon;
+            document.getElementById('pozonSub').innerText = data.pSub;
+            document.getElementById('sourceTitle').innerText = data.source;
+            document.getElementById('sourceSub').innerText = data.sSub;
+            
+            document.querySelectorAll('#addBtn').forEach(btn => btn.innerText = data.add);
         }
 
-        function updateCartUI() {
-            if (cart.length > 0) {
-                cartCount.classList.remove('hidden');
-                cartCount.innerText = cart.length;
-                
-                let html = '';
-                let total = 0;
-                cart.forEach((item, index) => {
-                    total += item.price;
-                    html += `
-                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
-                            <div>
-                                <h4 class="font-bold text-sm">${item.name}</h4>
-                                <span class="text-accent text-xs">${item.price} ر.س</span>
-                            </div>
-                            <button onclick="removeItem(${index})" class="text-red-400 hover:text-red-600 text-xs">حذف</button>
-                        </div>
-                    `;
-                });
-                cartItemsList.innerHTML = html;
-                cartTotal.innerText = `${total} ر.س`;
+        // --- Cart Logic ---
+        let cart = [];
+        function addToCart(name, price) {
+            cart.push({name, price});
+            document.getElementById('cartBadge').innerText = cart.length;
+            alert(`تمت إضافة ${name} إلى السلة بنجاح!`);
+        }
+
+        function payout() {
+            if(cart.length === 0) {
+                alert("لا توجد أرباح معلقة حالياً.");
             } else {
-                cartCount.classList.add('hidden');
-                cartItemsList.innerHTML = '<p class="text-center text-gray-500 py-4">السلة فارغة حالياً</p>';
-                cartTotal.innerText = '0 ر.س';
+                alert("جاري معالجة تحويل الأرباح إلى حساب بوزون: MAHA-ACC-GLOBAL-2026...");
             }
         }
 
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCartUI();
+        // --- Bot Logic ---
+        function toggleBot() {
+            document.getElementById('botUI').classList.toggle('hidden');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            if(!input.value) return;
+
+            messages.innerHTML += `<div class="bg-pink-100 p-3 rounded-2xl text-right ml-8 shadow-sm">أنتِ: ${input.value}</div>`;
+            
+            const userQuery = input.value.toLowerCase();
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = "سأقوم بمراجعة الموردين والرد عليكِ فوراً بخصوص طلبك.";
+                if(userQuery.includes("سعر")) reply = "الأسعار موضحة بالدولار تحت كل منتج، ويمكن الدفع بوزون.";
+                if(userQuery.includes("تالف")) reply = "نحن نضمن استرداد الأموال 100% في حال وصول أي قطعة تالفة.";
+                
+                messages.innerHTML += `<div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 mr-8">روبوت مها: ${reply}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 800);
         }
     </script>
 </body>
