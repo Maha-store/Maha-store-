@@ -3,183 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maha Luxury Store | الدفع المباشر</title>
+    <title>Maha Store - Global Fashion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #db2777; }
-        body { font-family: 'Cairo', sans-serif; transition: all 0.3s ease; }
+        :root { --main-pink: #db2777; --bg-dark: #09090b; }
+        body { font-family: 'Cairo', 'Poppins', sans-serif; scroll-behavior: smooth; }
         .ltr { font-family: 'Poppins', sans-serif; direction: ltr; text-align: left; }
         .rtl { font-family: 'Cairo', sans-serif; direction: rtl; text-align: right; }
-        .hidden-admin { display: none !important; }
-        .payment-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .payment-modal.active { display: flex; }
+        .payment-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .payment-overlay.active { display: flex; }
+        .hidden-admin-info { display: none !important; }
+        .promo-card { background: linear-gradient(145deg, #18181b, #27272a); border: 1px solid #3f3f46; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-gray-50">
 
-    <!-- بيانات الإدارة المخفية تماماً -->
-    <div class="hidden-admin">
-        <span id="admin-phone">0034632684017</span>
-        <span id="store-url">https://maha-store.github.io/Maha-store-/</span>
+    <!-- معلومات الإدارة المشفرة -->
+    <div class="hidden-admin-info">
+        <span id="target-number">0034632684017</span>
+        <span id="site-url">https://maha-store.github.io/Maha-store-/</span>
     </div>
 
     <!-- شريط اللغات العلوي -->
-    <div class="bg-black text-white py-1.5 px-6 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+    <header class="bg-zinc-950 text-white text-[10px] py-2 px-6 flex justify-between items-center font-bold tracking-widest border-b border-pink-900/30">
         <div class="flex gap-4">
-            <button onclick="changeLang('ar')">العربية</button>
-            <button onclick="changeLang('en')">English</button>
-            <button onclick="changeLang('fr')">Français</button>
-            <button onclick="changeLang('es')">Español</button>
-            <button onclick="changeLang('de')">Deutsch</button>
+            <button onclick="updateLang('ar')" class="hover:text-pink-500 transition">العربية</button>
+            <button onclick="updateLang('en')" class="hover:text-pink-500 transition">EN</button>
+            <button onclick="updateLang('fr')" class="hover:text-pink-500 transition">FR</button>
+            <button onclick="updateLang('es')" class="hover:text-pink-500 transition">ES</button>
+            <button onclick="updateLang('de')" class="hover:text-pink-500 transition">DE</button>
         </div>
         <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span>
-            <span id="live-tag">اتصال مالي مشفر نشط</span>
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span id="status-label">نظام التحويل المباشر نشط</span>
         </div>
-    </div>
+    </header>
 
     <!-- الملاحة -->
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-pink-100 px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-black text-pink-700 italic" id="logo">Maha Luxury</div>
-        <div class="flex items-center gap-5">
-            <a href="#marketing" class="text-[11px] font-bold text-slate-500 hover:text-pink-600 transition" id="nav-mark">الإشهار</a>
-            <button class="bg-pink-600 text-white p-2 rounded-xl relative shadow-lg">
-                🛒 <span id="cart-num" class="absolute -top-1 -right-1 bg-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
-            </button>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="text-2xl font-black text-pink-600 italic tracking-tighter" id="brand">MAHA GLOBAL</div>
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex gap-6 text-[11px] font-black uppercase text-gray-500 tracking-wider">
+                <a href="#shop" id="nav-shop">المنتجات</a>
+                <a href="#promo" id="nav-promo">بوت الإشهار</a>
+            </div>
+            <div class="relative cursor-pointer">
+                🛒 <span id="badge" class="absolute -top-2 -right-2 bg-pink-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+            </div>
         </div>
     </nav>
 
-    <!-- واجهة الإشهار -->
-    <section id="marketing" class="bg-slate-900 py-10 text-white">
+    <!-- قسم بوت الإشهار -->
+    <section id="promo" class="py-12 bg-zinc-900 text-white">
         <div class="container mx-auto px-6">
-            <div class="bg-slate-800 p-8 rounded-[2.5rem] border border-slate-700">
-                <h2 class="text-2xl font-black text-pink-500 mb-4" id="mark-title">بوت الإشهار والتسويق</h2>
-                <p class="text-slate-400 text-sm mb-6" id="mark-sub">قومي بتوليد إعلانك الاحترافي ونشره لجذب الأموال إلى حسابك.</p>
-                <div id="promo-display" class="bg-black/30 p-4 rounded-xl mb-6 text-sm hidden border border-pink-900/30">
-                    <p id="promo-text"></p>
-                    <button onclick="copyPromo()" class="mt-4 bg-pink-600 px-6 py-2 rounded-lg font-bold text-xs hover:bg-pink-700">نسخ الإعلان وتجهيز النشر</button>
+            <div class="promo-card p-8 rounded-[2rem] shadow-2xl">
+                <h2 class="text-2xl font-black text-pink-500 mb-2" id="promo-h">إشهار المتجر التلقائي</h2>
+                <p class="text-gray-400 text-xs mb-8" id="promo-p">استخدمي البوت لإنشاء منشورات دعائية احترافية لجذب الزبائن والتحويلات.</p>
+                
+                <div id="ad-display" class="hidden bg-black/50 p-6 rounded-2xl mb-8 border border-pink-900/20">
+                    <p id="ad-content" class="text-sm leading-relaxed text-gray-200"></p>
+                    <button onclick="copyAdText()" class="mt-6 bg-pink-600 hover:bg-pink-700 px-8 py-3 rounded-xl font-black text-xs transition-all shadow-lg shadow-pink-900/20">نسخ الإعلان وتجهيز النشر ✅</button>
                 </div>
-                <div class="flex flex-wrap gap-3">
-                    <button onclick="generateAd('ar')" class="bg-white/5 px-4 py-2 rounded-lg text-xs hover:bg-white/10">إعلان عربي 🇸🇦</button>
-                    <button onclick="generateAd('es')" class="bg-white/5 px-4 py-2 rounded-lg text-xs hover:bg-white/10">Publicidad ES 🇪🇸</button>
-                    <button onclick="generateAd('en')" class="bg-white/5 px-4 py-2 rounded-lg text-xs hover:bg-white/10">Ad English 🇺🇸</button>
+
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="genAd('ar')" class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2.5 rounded-xl text-[11px] font-bold transition">بالعربية 🇸🇦</button>
+                    <button onclick="genAd('es')" class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2.5 rounded-xl text-[11px] font-bold transition">Español 🇪🇸</button>
+                    <button onclick="genAd('en')" class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2.5 rounded-xl text-[11px] font-bold transition">English 🇺🇸</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- المنتجات -->
-    <main class="py-16 container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- عرض المنتجات -->
+    <main id="shop" class="py-20 container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight text-zinc-900" id="hero-h">أزياء عالمية فاخرة</h1>
+            <p class="text-gray-500 max-w-2xl mx-auto text-sm leading-relaxed" id="hero-sub">تصفحي مجموعاتنا الحصرية مع ضمان استرداد الأموال ونظام تحويل مباشر للإدارة لضمان أسرع خدمة.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <!-- منتج 1 -->
-            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=500" class="w-full h-80 object-cover group-hover:scale-105 transition">
-                <div class="p-6 text-center">
-                    <h3 class="font-bold text-lg mb-2">طقم النخبة الملكي</h3>
-                    <p class="text-pink-600 font-black text-xl mb-4">$320.00</p>
-                    <button onclick="triggerPayment('طقم النخبة الملكي', 320)" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-pink-700 transition">اطلب الأن وحول الأموال</button>
+            <div class="bg-white rounded-[3rem] shadow-xl shadow-gray-200/50 border border-gray-50 overflow-hidden group">
+                <div class="h-[450px] overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1539109132314-347f85417bd4?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt="طقم فاخر">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                         <button onclick="openPayment('طقم كوتور الملكي', 390)" class="w-full bg-white text-black py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl">طلب المنتج والتحويل</button>
+                    </div>
+                </div>
+                <div class="p-8 text-center">
+                    <h3 class="font-black text-xl mb-2 text-zinc-800">طقم كوتور الملكي</h3>
+                    <p class="text-pink-600 font-black text-2xl">$390.00</p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- نافذة تحويل الأموال (المخفية وتظهر عند الطلب) -->
-    <div id="payment-modal" class="payment-modal p-6">
-        <div class="bg-white rounded-[2.5rem] w-full max-w-md p-8 text-center relative">
-            <button onclick="closePayment()" class="absolute top-6 right-6 text-slate-400">✕</button>
-            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">💰</div>
-            <h2 class="text-2xl font-black mb-2">تأكيد طلب التحويل</h2>
-            <p class="text-slate-500 text-sm mb-6">لإتمام عملية الشراء، يرجى تحويل المبلغ المطلوب إلى رقم الحساب المعتمد لدينا.</p>
+    <!-- نافذة الدفع المشفرة -->
+    <div id="payModal" class="payment-overlay px-6">
+        <div class="bg-white rounded-[3rem] w-full max-w-md p-10 text-center relative shadow-[0_0_100px_rgba(219,39,119,0.2)]">
+            <div class="w-20 h-20 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl animate-bounce">✓</div>
+            <h2 class="text-2xl font-black mb-4 text-zinc-900">نظام الدفع المباشر</h2>
+            <p class="text-gray-500 text-xs mb-8 leading-relaxed">لإكمال طلبك، يرجى إجراء التحويل المالي للرقم التالي. نظامنا سيقوم بربط العملية برقمك تلقائياً.</p>
             
-            <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200 mb-6">
-                <span class="text-xs text-slate-400 block mb-1 uppercase tracking-widest">رقم التحويل المباشر</span>
-                <span class="text-xl font-mono font-bold text-pink-700 tracking-wider">0034632684017</span>
+            <div class="bg-zinc-50 p-6 rounded-[2rem] border-2 border-dashed border-pink-200 mb-8 relative group">
+                <span class="text-[9px] text-gray-400 block uppercase tracking-widest mb-2 font-black">رقم التحويل المعتمد</span>
+                <span class="text-2xl font-mono font-black text-pink-700 tracking-tighter">0034632684017</span>
             </div>
 
-            <p class="text-[10px] text-slate-400 mb-6 px-4">بعد إتمام التحويل، سيقوم نظامنا آلياً بربط العملية برقم هاتفك وتأكيد الشحن خلال 24 ساعة.</p>
-            
-            <button onclick="confirmTransfer()" class="w-full bg-pink-600 text-white py-4 rounded-xl font-bold shadow-xl">لقد قمت بالتحويل الآن</button>
+            <button onclick="finalize()" class="w-full bg-pink-600 text-white py-5 rounded-2xl font-black shadow-xl hover:bg-pink-700 transition transform active:scale-95">لقد تم التحويل ✅</button>
+            <button onclick="closePayment()" class="mt-6 text-gray-400 text-[10px] underline tracking-widest font-bold">إلغاء العملية</button>
         </div>
     </div>
-
-    <!-- بوت المساعدة -->
-    <div id="chat-bot" class="fixed bottom-6 left-6 z-[100] w-72 bg-white rounded-3xl shadow-2xl border border-pink-50 hidden overflow-hidden">
-        <div class="bg-slate-900 p-4 text-white font-bold text-xs flex justify-between">
-            <span>🤖 Maha Pay Bot</span>
-            <button onclick="toggleChat()">×</button>
-        </div>
-        <div id="chat-msgs" class="h-48 p-4 overflow-y-auto text-[10px] space-y-2 bg-slate-50">
-            <div class="bg-white p-2 rounded-lg">أهلاً بكِ! جميع التحويلات تتم مباشرة لرقم الإدارة المعتمد. هل واجهتِ مشكلة في الدفع؟</div>
-        </div>
-        <div class="p-3 bg-white flex border-t">
-            <input id="chat-inp" type="text" placeholder="اكتبي سؤالك..." class="flex-1 text-[10px] outline-none">
-            <button onclick="sendMsg()" class="text-pink-600 font-bold px-2 text-xs">ارسال</button>
-        </div>
-    </div>
-    <button onclick="toggleChat()" class="fixed bottom-6 left-6 bg-slate-900 text-white w-14 h-14 rounded-full shadow-2xl z-[99] flex items-center justify-center text-xl">🤖</button>
 
     <script>
-        // اللغات
-        const langData = {
-            ar: { logo: "مها لوكشري", m_t: "بوت الإشهار والتسويق", n_m: "الإشهار", guard: "ضمان استرداد 100% للبضائع التالفة" },
-            en: { logo: "Maha Luxury", m_t: "Marketing & Promo Bot", n_m: "Marketing", guard: "100% Refund for Damaged Goods" },
-            es: { logo: "Maha Lujo", m_t: "Bot de Marketing", n_m: "Marketing", guard: "Garantía de devolución del 100%" }
+        const translations = {
+            ar: { brand: "مها للموضة", hero_h: "أزياء عالمية فاخرة", hero_s: "تصفحي مجموعاتنا الحصرية مع ضمان استرداد الأموال ونظام تحويل مباشر.", n1: "المنتجات", n2: "بوت الإشهار", p_h: "إشهار المتجر التلقائي", p_p: "استخدمي البوت لإنشاء منشورات دعائية احترافية.", status: "نظام التحويل المباشر نشط" },
+            en: { brand: "MAHA GLOBAL", hero_h: "Elite Global Fashion", hero_s: "Browse our exclusive collections with a full refund guarantee and direct transfer system.", n1: "Products", n2: "Promo Bot", p_h: "Auto Promotion Bot", p_p: "Use the bot to generate professional ad posts.", status: "Direct Transfer Active" },
+            es: { brand: "MAHA LUJO", hero_h: "Moda Global de Élite", hero_s: "Explore nuestras colecciones exclusivas con garantía de reembolso y transferencia directa.", n1: "Productos", n2: "Bot Promo", p_h: "Bot de Promoción", p_p: "Genera publicaciones publicitarias profesionales.", status: "Transferencia Directa Activa" }
         };
 
-        function changeLang(l) {
+        function updateLang(l) {
             const h = document.getElementById('mainHtml');
+            const d = translations[l] || translations['en'];
             h.lang = l;
             h.dir = (l === 'ar') ? 'rtl' : 'ltr';
             document.body.className = (l === 'ar') ? 'rtl' : 'ltr';
-            document.getElementById('logo').innerText = langData[l]?.logo || "Maha Luxury";
-            document.getElementById('nav-mark').innerText = langData[l]?.n_m || "Marketing";
-            document.getElementById('mark-title').innerText = langData[l]?.m_t || "Marketing Bot";
+            document.getElementById('brand').innerText = d.brand;
+            document.getElementById('hero-h').innerText = d.hero_h;
+            document.getElementById('hero-sub').innerText = d.hero_s;
+            document.getElementById('nav-shop').innerText = d.n1;
+            document.getElementById('nav-promo').innerText = d.n2;
+            document.getElementById('promo-h').innerText = d.p_h;
+            document.getElementById('promo-p').innerText = d.p_p;
+            document.getElementById('status-label').innerText = d.status;
         }
 
-        // بوت الإشهار
-        function generateAd(lang) {
-            const url = document.getElementById('store-url').innerText;
+        function genAd(l) {
+            const url = document.getElementById('site-url').innerText;
             const ads = {
-                ar: `👗 تألقي مع أحدث صيحات الموضة العالمية من "مها ستور"!\n✅ ضمان جودة واسترداد أموال.\n💰 دفع آمن وتحويل مباشر.\n🛒 تسوقي هنا: ${url}`,
-                es: `👗 ¡Brilla con las últimas tendencias de moda de "Maha Store"!\n✅ Calidad garantizada.\n💰 Pago seguro y transferencia directa.\n🛒 Compra aquí: ${url}`,
-                en: `👗 Shine with the latest trends from "Maha Store"!\n✅ Quality guaranteed.\n💰 Secure direct transfer.\n🛒 Shop here: ${url}`
+                ar: `👗 اكتشفي الرقي مع "مها ستور"! أزياء عالمية فاخرة تصلكِ أينما كنتِ.\n✨ جودة مضمونة + استرداد أموال.\n💰 دفع آمن عبر التحويل المباشر.\n🛍️ تسوقي الآن: ${url}`,
+                es: `👗 ¡Descubre la elegancia con "Maha Store"! Moda global de élite.\n✨ Calidad garantizada + Reembolso.\n💰 Pago seguro por transferencia directa.\n🛍️ Compra aquí: ${url}`,
+                en: `👗 Discover elegance with "Maha Store"! Elite global fashion.\n✨ Guaranteed quality + Refund.\n💰 Secure payment via direct transfer.\n🛍️ Shop here: ${url}`
             };
-            document.getElementById('promo-display').classList.remove('hidden');
-            document.getElementById('promo-text').innerText = ads[lang] || ads['ar'];
+            document.getElementById('ad-display').classList.remove('hidden');
+            document.getElementById('ad-content').innerText = ads[l] || ads['en'];
         }
 
-        function copyPromo() {
-            const text = document.getElementById('promo-text').innerText;
-            navigator.clipboard.writeText(text).then(() => alert("تم نسخ الإعلان! انشريه الآن لجذب الأرباح."));
+        function copyAdText() {
+            navigator.clipboard.writeText(document.getElementById('ad-content').innerText);
+            alert("تم نسخ الإعلان! يمكنكِ البدء في نشره الآن.");
         }
 
-        // نظام الدفع والتحويل
-        function triggerPayment(name, price) {
-            document.getElementById('payment-modal').classList.add('active');
-        }
-
-        function closePayment() {
-            document.getElementById('payment-modal').classList.remove('active');
-        }
-
-        function confirmTransfer() {
-            alert("شكراً لكِ! تم استلام تأكيد التحويل. جاري مراجعة العملية من قبل الإدارة وسيتم إشعاركِ بالنتيجة عبر رقمكِ المسجل.");
+        function openPayment(n, p) { document.getElementById('payModal').classList.add('active'); }
+        function closePayment() { document.getElementById('payModal').classList.remove('active'); }
+        function finalize() {
+            alert("شكراً لكِ! تم تسجيل طلب التحويل الخاص بكِ. ستتواصل معكِ الإدارة لتأكيد الشحن فور التحقق.");
             closePayment();
-            document.getElementById('cart-num').innerText = parseInt(document.getElementById('cart-num').innerText) + 1;
-        }
-
-        function toggleChat() { document.getElementById('chat-bot').classList.toggle('hidden'); }
-        function sendMsg() {
-            const inp = document.getElementById('chat-inp');
-            const msgs = document.getElementById('chat-msgs');
-            if(!inp.value) return;
-            msgs.innerHTML += `<div class="text-right text-pink-600 font-bold">أنتِ: ${inp.value}</div>`;
-            setTimeout(() => {
-                msgs.innerHTML += `<div class="bg-white p-2 rounded-lg italic">روبوت مها: جميع الطلبات والتحويلات يتم مراجعتها برقمك المعتمد 003463***.</div>`;
-                msgs.scrollTop = msgs.scrollHeight;
-            }, 600);
-            inp.value = '';
+            document.getElementById('badge').innerText = parseInt(document.getElementById('badge').innerText) + 1;
         }
     </script>
 </body>
