@@ -3,120 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHA | Luxury Global Sourcing</title>
+    <title>مها ستور - الأناقة والجمال</title>
+    <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cairo Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+Arabic:wght@300;700;900&display=swap');
-        body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #fafafa; }
-        .brand-font { font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
-        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .hero-gradient { background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); }
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .bg-primary { background-color: #fdf2f8; }
+        .text-accent { color: #db2777; }
+        .btn-accent { background-color: #db2777; }
+        .btn-accent:hover { background-color: #be185d; }
     </style>
 </head>
-<body class="text-stone-900 overflow-x-hidden">
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Header -->
-    <header class="glass-nav sticky top-0 z-50 border-b border-stone-100 py-6 px-10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="brand-font text-3xl font-bold tracking-tighter">MAHA</div>
-            <div class="flex items-center gap-6">
-                <nav class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-widest text-stone-400">
-                    <a href="#" class="hover:text-black transition">الرئيسية</a>
-                    <a href="#collection" class="text-black">التشكيلة</a>
-                    <a href="https://wa.me/34632684017" class="hover:text-black transition">طلب خاص</a>
-                </nav>
-                <div class="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center">
-                    <i class="fas fa-shopping-bag text-xs"></i>
+    <!-- Header & Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-accent">مها ستور</div>
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+                <a href="#" class="hover:text-accent font-semibold transition">الرئيسية</a>
+                <a href="#products" class="hover:text-accent font-semibold transition">المنتجات</a>
+                <a href="#about" class="hover:text-accent font-semibold transition">من نحن</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="cartBtn" class="relative p-2 text-gray-600 hover:text-accent transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-primary py-16 md:py-24 border-b border-pink-100">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 text-center md:text-right mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                    تألقي بلمسة <span class="text-accent">مها</span> الخاصة
+                </h1>
+                <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto md:mx-0">
+                    نقدم لكِ أرقى تشكيلات الأزياء والإكسسوارات التي تبرز جمالكِ وتمنحكِ الثقة في كل خطوة.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#products" class="btn-accent text-white px-10 py-4 rounded-xl font-bold shadow-lg transition">تسوقي الآن</a>
+                    <a href="#about" class="bg-white text-accent border-2 border-accent px-10 py-4 rounded-xl font-bold hover:bg-pink-50 transition">تعرفي علينا</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-pink-300/20 blur-2xl rounded-full"></div>
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600" alt="صورة فاشن" class="relative rounded-2xl shadow-2xl w-full max-w-sm rotate-2">
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient min-h-[80vh] flex items-center px-10 md:px-20 relative">
-        <div class="max-w-3xl z-10">
-            <h5 class="text-[11px] font-black uppercase tracking-[0.5em] text-stone-500 mb-6">Maha Global Operations</h5>
-            <h1 class="brand-font text-6xl md:text-8xl leading-none mb-10 text-stone-900">Elite <br><span class="italic text-stone-400 underline decoration-stone-200">Sourcing</span></h1>
-            <p class="text-stone-600 text-lg leading-relaxed mb-12 max-w-md">أناقة أطفالكِ تبدأ من المصدر. نربطكِ مباشرة بأرقى مصانع الموضة في إسبانيا وتركيا لضمان الجودة والسعر.</p>
-            <a href="#collection" class="bg-stone-900 text-white px-14 py-5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl hover:bg-stone-800 transition">استكشفي الآن</a>
-        </div>
-        <div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-10 flex items-center justify-center hidden lg:flex">
-             <i class="fas fa-globe-europe text-[30rem]"></i>
+    <!-- Categories / Features -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="flex items-center gap-4 p-6 bg-pink-50 rounded-2xl">
+                <div class="bg-white p-3 rounded-lg text-accent">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="2" /></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold">جودة عالية</h4>
+                    <p class="text-sm text-gray-500">خامات مختارة بعناية</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 p-6 bg-blue-50 rounded-2xl">
+                <div class="bg-white p-3 rounded-lg text-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 12H4" stroke-width="2" /></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold">توصيل سريع</h4>
+                    <p class="text-sm text-gray-500">لباب بيتك في وقت قياسي</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 p-6 bg-purple-50 rounded-2xl">
+                <div class="bg-white p-3 rounded-lg text-purple-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 8v4l3 3" stroke-width="2" /></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold">دعم 24/7</h4>
+                    <p class="text-sm text-gray-500">نحن معكِ دائماً</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Collection -->
-    <section id="collection" class="py-32 px-10 max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-20 border-b pb-10">
-            <h2 class="brand-font text-4xl italic">Direct From Factory</h2>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">مجموعة خريف/شتاء 2024</p>
+    <!-- Products Section -->
+    <section id="products" class="py-20 container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div class="text-right mb-6 md:mb-0">
+                <h2 class="text-3xl font-bold mb-2">مجموعتنا المختارة</h2>
+                <div class="h-1 bg-accent w-20"></div>
+            </div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
-            <!-- Product 1 -->
-            <div class="group">
-                <div class="aspect-[3/4] bg-white rounded-[3rem] border border-stone-100 relative overflow-hidden flex items-center justify-center shadow-sm hover:shadow-xl transition-all duration-500">
-                    <i class="fas fa-crown text-stone-50 text-9xl group-hover:scale-110 transition duration-700"></i>
-                    <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition flex items-end p-8">
-                        <button onclick="window.location.href='https://wa.me/34632684017?text=أريد الاستفسار عن فستان المناسبات الفاخر'" class="w-full bg-stone-900 text-white py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest shadow-2xl">طلب عبر الواتساب</button>
-                    </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product Item 1 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=400" alt="فستان وردي" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute top-3 left-3 bg-white text-accent px-3 py-1 rounded-full text-xs font-bold shadow">جديد</div>
                 </div>
-                <div class="mt-8 flex justify-between items-start px-4">
-                    <div>
-                        <h4 class="text-sm font-black mb-1">فستان المناسبات الفاخر</h4>
-                        <p class="text-[9px] text-stone-400 font-bold uppercase">Imported from Turkey</p>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg mb-2">فستان سهرة ناعم</h3>
+                    <p class="text-gray-500 text-sm mb-4">تصميم عصري يناسب المناسبات</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-accent">350 ر.س</span>
+                        <button onclick="addToCart('فستان سهرة ناعم', 350)" class="bg-gray-100 p-2 rounded-lg hover:bg-accent hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                        </button>
                     </div>
-                    <span class="font-black text-xl">130€</span>
                 </div>
             </div>
 
-            <!-- Product 2 -->
-            <div class="group">
-                <div class="aspect-[3/4] bg-white rounded-[3rem] border border-stone-100 relative overflow-hidden flex items-center justify-center shadow-sm hover:shadow-xl transition-all duration-500">
-                    <i class="fas fa-award text-stone-50 text-9xl group-hover:scale-110 transition duration-700"></i>
-                    <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition flex items-end p-8">
-                        <button onclick="window.location.href='https://wa.me/34632684017?text=أريد الاستفسار عن الطقم الملكي للأطفال'" class="w-full bg-stone-900 text-white py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest shadow-2xl">طلب عبر الواتساب</button>
+            <!-- Product Item 2 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400" alt="حقيبة" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg mb-2">حقيبة يد جلد فاخرة</h3>
+                    <p class="text-gray-500 text-sm mb-4">متوفرة بعدة ألوان رائعة</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-accent">220 ر.س</span>
+                        <button onclick="addToCart('حقيبة يد جلد', 220)" class="bg-gray-100 p-2 rounded-lg hover:bg-accent hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                        </button>
                     </div>
                 </div>
-                <div class="mt-8 flex justify-between items-start px-4">
-                    <div>
-                        <h4 class="text-sm font-black mb-1">طقم "مها" الملكي</h4>
-                        <p class="text-[9px] text-stone-400 font-bold uppercase">Spanish Design</p>
-                    </div>
-                    <span class="font-black text-xl">95€</span>
+            </div>
+
+            <!-- Product Item 3 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=400" alt="عطر" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
                 </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg mb-2">عطر مها الخاص</h3>
+                    <p class="text-gray-500 text-sm mb-4">رائحة فريدة تدوم طويلاً</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-accent">180 ر.س</span>
+                        <button onclick="addToCart('عطر مها الخاص', 180)" class="bg-gray-100 p-2 rounded-lg hover:bg-accent hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item 4 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1576053139778-7e32f2ae3cf4?auto=format&fit=crop&q=80&w=400" alt="إكسسوار" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg mb-2">طقم إكسسوارات ذهبية</h3>
+                    <p class="text-gray-500 text-sm mb-4">لمسة نهائية مذهلة لمظهرك</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-accent">120 ر.س</span>
+                        <button onclick="addToCart('طقم إكسسوارات', 120)" class="bg-gray-100 p-2 rounded-lg hover:bg-accent hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-100 border-y border-gray-200">
+        <div class="container mx-auto px-4 text-center max-w-2xl">
+            <h2 class="text-3xl font-bold mb-6 italic">عن مها ستور</h2>
+            <p class="text-gray-600 leading-relaxed text-lg mb-8">
+                بدأنا بشغف صغير للأناقة واليوم نحن هنا لنقدم لكِ أفضل ما توصلت إليه الموضة بأسعار منافسة. "مها ستور" ليس مجرد متجر، بل هو وجهتكِ اليومية لتكوني الأجمل دائماً.
+            </p>
+            <div class="flex justify-center gap-4">
+                <div class="h-2 w-2 rounded-full bg-accent"></div>
+                <div class="h-2 w-2 rounded-full bg-accent opacity-50"></div>
+                <div class="h-2 w-2 rounded-full bg-accent opacity-20"></div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white py-32 px-10 border-t border-stone-100">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-20">
-            <div>
-                <div class="brand-font text-3xl font-black mb-8 italic text-stone-900">MAHA</div>
-                <p class="text-[10px] text-stone-400 leading-loose uppercase font-bold tracking-tight">نحن المسؤولون تقنياً وإدارياً عن رحلة القطعة من المصنع إلى يدكِ. جودة نثق بها، وأناقة يستحقها طفلك.</p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-accent mb-6">مها ستور</h2>
+            <div class="flex justify-center gap-8 mb-8 text-sm opacity-70">
+                <a href="#" class="hover:text-white transition">سياسة الاستبدال</a>
+                <a href="#" class="hover:text-white transition">الشحن والتوصيل</a>
+                <a href="#" class="hover:text-white transition">تواصل معنا</a>
             </div>
-            <div>
-                <h5 class="text-[11px] font-black uppercase tracking-[0.3em] mb-10">التواصل الإداري</h5>
-                <p class="text-[10px] text-stone-500 leading-relaxed font-bold uppercase">
-                    Madrid, Spain<br>
-                    Global Logistics Division<br>
-                    <span class="text-stone-900 block mt-4">contact@maha-store.com</span>
-                </p>
-            </div>
-            <div>
-                <h5 class="text-[11px] font-black uppercase tracking-[0.3em] mb-10">حالة الشحن</h5>
-                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100 flex items-center gap-4">
-                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-[10px] font-black uppercase">جميع المصانع في تركيا وإسبانيا تعمل الآن</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-20 pt-10 border-t border-stone-50 text-center">
-            <p class="text-[8px] font-black text-stone-300 uppercase tracking-[0.5em]">&copy; 2024 MAHA GLOBAL SUPPLY CHAIN MGMT.</p>
+            <p class="text-xs opacity-40">جميع الحقوق محفوظة © 2026 - تم التطوير لـ مها ستور</p>
         </div>
     </footer>
 
+    <!-- Cart Modal (Simple UI) -->
+    <div id="cartModal" class="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">سلة المشتريات</h3>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="cartItemsList" class="space-y-4 max-h-60 overflow-y-auto mb-6">
+                <p class="text-center text-gray-500 py-4">السلة فارغة حالياً</p>
+            </div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between font-bold text-lg mb-6">
+                    <span>الإجمالي:</span>
+                    <span id="cartTotal">0 ر.س</span>
+                </div>
+                <button onclick="alert('سيتم ربط بوابة الدفع قريباً!')" class="w-full btn-accent text-white py-4 rounded-xl font-bold shadow-lg transition">إتمام الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let cart = [];
+        const cartCount = document.getElementById('cartCount');
+        const cartItemsList = document.getElementById('cartItemsList');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartModal = document.getElementById('cartModal');
+        const cartBtn = document.getElementById('cartBtn');
+
+        function toggleCart() {
+            cartModal.classList.toggle('hidden');
+        }
+
+        cartBtn.addEventListener('click', toggleCart);
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            
+            // Notification effect
+            const btn = event.currentTarget;
+            btn.innerHTML = '✓';
+            setTimeout(() => {
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>';
+            }, 1000);
+        }
+
+        function updateCartUI() {
+            if (cart.length > 0) {
+                cartCount.classList.remove('hidden');
+                cartCount.innerText = cart.length;
+                
+                let html = '';
+                let total = 0;
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    html += `
+                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                            <div>
+                                <h4 class="font-bold text-sm">${item.name}</h4>
+                                <span class="text-accent text-xs">${item.price} ر.س</span>
+                            </div>
+                            <button onclick="removeItem(${index})" class="text-red-400 hover:text-red-600 text-xs">حذف</button>
+                        </div>
+                    `;
+                });
+                cartItemsList.innerHTML = html;
+                cartTotal.innerText = `${total} ر.س`;
+            } else {
+                cartCount.classList.add('hidden');
+                cartItemsList.innerHTML = '<p class="text-center text-gray-500 py-4">السلة فارغة حالياً</p>';
+                cartTotal.innerText = '0 ر.س';
+            }
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+    </script>
 </body>
 </html>
+
