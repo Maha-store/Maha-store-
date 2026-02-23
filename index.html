@@ -3,296 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maha Luxury | منصة التجارة العالمية</title>
+    <title>Maha Luxury | نظام الربط العالمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #fcfcfc; }
-        .hero-gradient { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); }
-        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
-        .product-card:hover .buy-btn { opacity: 1; transform: translateY(0); }
-        .notification-toast { animation: slideIn 0.5s ease-out; }
-        @keyframes slideIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .shimmer-text { background: linear-gradient(90deg, #fff, #be185d, #fff); background-size: 200% 100%; animation: shimmer 3s infinite linear; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        @keyframes shimmer { to { background-position: 200% 0; } }
+        body { font-family: 'Cairo', sans-serif; background-color: #f8f8f8; }
+        .ai-glow { box-shadow: 0 0 15px rgba(190, 24, 93, 0.3); border: 1px solid rgba(190, 24, 93, 0.2); }
+        .bot-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+        .tech-bg { background: radial-gradient(circle at top right, #fff5f7, #ffffff); }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="tech-bg">
 
-    <!-- نظام اللوجستيات: شريط التنبيهات الذكي -->
-    <div class="bg-pink-700 text-white text-[11px] py-2 px-6 flex justify-between items-center font-bold">
-        <div class="flex items-center gap-4">
-            <span class="animate-pulse">● مباشر</span>
-            <span id="logistics-update">الشحن متاح الآن إلى: إسبانيا، فرنسا، الإمارات، والمغرب</span>
+    <!-- شريط حالة الربط مع البوتات الخارجية -->
+    <div class="bg-zinc-900 text-[10px] text-white py-1 px-6 flex justify-between items-center font-mono">
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-500 rounded-full bot-pulse"></span>
+            <span id="botStatus">MAHA-AI BRIDGE: متصل بمحركات البحث العالمية</span>
         </div>
-        <div class="hidden md:block">الرقم الرسمي المعتمد للتحويل: 0034632684017</div>
+        <div class="text-pink-500 font-bold">API ACTIVE | V3.2</div>
     </div>
 
-    <!-- الملاحة التقنية -->
-    <nav class="sticky top-0 z-50 glass-nav border-b border-gray-100 px-6 py-4 flex justify-between items-center">
+    <!-- الملاحة -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b px-6 py-4 flex justify-between items-center">
         <div class="flex flex-col">
-            <h1 class="text-2xl font-black text-zinc-900 tracking-tighter leading-none">MAHA <span class="text-pink-600 italic">LUXURY</span></h1>
-            <span class="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Global Logistics Verified</span>
+            <h1 class="text-xl font-black text-zinc-900">MAHA <span class="text-pink-600">LUXURY</span></h1>
+            <span class="text-[7px] text-gray-400 font-bold tracking-[0.4em] uppercase">Global Logistics Network</span>
         </div>
-        
-        <div class="hidden lg:flex gap-8 text-[11px] font-black uppercase text-zinc-500">
-            <a href="#women" class="hover:text-pink-600 transition">النساء</a>
-            <a href="#kids" class="hover:text-pink-600 transition">الأطفال</a>
-            <a href="#ads-engine" class="hover:text-pink-600 transition underline decoration-pink-500">مركز الإشهار</a>
-            <a href="#tracking" class="hover:text-pink-600 transition">تتبع الطلب</a>
-        </div>
-
         <div class="flex items-center gap-4">
-            <button onclick="toggleCart()" class="relative bg-zinc-900 text-white p-3 rounded-2xl">
-                🛒 <span id="cart-count" class="absolute -top-1 -right-1 bg-pink-500 text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
-            </button>
+            <div id="trafficCount" class="bg-zinc-100 px-3 py-1 rounded-full text-[9px] font-bold text-zinc-600">
+                الزوار الآن: 142
+            </div>
+            <button onclick="openLogistics()" class="bg-zinc-900 text-white p-2 rounded-xl text-sm">🛒</button>
         </div>
     </nav>
 
-    <!-- الواجهة الدعائية (Hero Section) -->
-    <header class="hero-gradient min-h-[80vh] flex items-center relative overflow-hidden text-white px-8">
-        <div class="container mx-auto grid lg:grid-cols-2 items-center gap-12 z-10">
-            <div class="text-right">
-                <span class="bg-pink-600/20 text-pink-400 px-4 py-1 rounded-full text-xs font-bold mb-6 inline-block">موسم 2026 الحصري</span>
-                <h2 class="text-5xl md:text-7xl font-black mb-6 leading-[1.1]">أزياء عالمية <br><span class="shimmer-text">بلمسة ملكية</span></h2>
-                <p class="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">نظامنا التقني يربطكِ مباشرة بأكبر الشركات العالمية. جودة مضمونة، شحن سريع، ودفع آمن عبر التحويل المباشر.</p>
-                <div class="flex gap-4">
-                    <a href="#women" class="bg-pink-600 hover:bg-pink-700 text-white px-10 py-4 rounded-2xl font-bold text-sm transition-all shadow-xl shadow-pink-900/20">تسوقي الآن</a>
-                    <a href="#tracking" class="bg-white/10 hover:bg-white/20 text-white px-10 py-4 rounded-2xl font-bold text-sm transition-all border border-white/10">تتبع الشحنات</a>
+    <!-- واجهة الدعاية والربط الذكي -->
+    <header class="py-16 px-6 container mx-auto text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black text-zinc-900 mb-6 leading-tight">متجركِ المتصل <br><span class="text-pink-600">بكل أنظمة الإنترنت</span></h2>
+            <p class="text-gray-500 text-sm mb-10 leading-relaxed">هذا المتجر مجهز ببوتات Maha-AI التي تتخاطب مع منصات التسوق العالمية لزيادة ظهور منتجاتك وجذب الزبائن المستهدفين تلقائياً.</p>
+            
+            <!-- لوحة تحكم الربط (للمسؤول فقط ولكن ظاهرة للتوضيح) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                <div class="ai-glow bg-white p-4 rounded-2xl">
+                    <span class="block text-lg font-black text-pink-600">Google SEO</span>
+                    <span class="text-[9px] text-gray-400">مؤرشف تلقائياً</span>
+                </div>
+                <div class="ai-glow bg-white p-4 rounded-2xl">
+                    <span class="block text-lg font-black text-blue-600">Social Bot</span>
+                    <span class="text-[9px] text-gray-400">نشر عابر للمنصات</span>
+                </div>
+                <div class="ai-glow bg-white p-4 rounded-2xl">
+                    <span class="block text-lg font-black text-green-600">Logistics</span>
+                    <span class="text-[9px] text-gray-400">ربط مع شركات الشحن</span>
+                </div>
+                <div class="ai-glow bg-white p-4 rounded-2xl">
+                    <span class="block text-lg font-black text-purple-600">Sync API</span>
+                    <span class="text-[9px] text-gray-400">تحديث المخزون حي</span>
                 </div>
             </div>
-            <div class="hidden lg:block relative">
-                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800" class="rounded-[4rem] shadow-2xl border-4 border-white/5 animate-float" alt="">
-            </div>
         </div>
-        <!-- تأثيرات بصرية خلفية -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[120px]"></div>
     </header>
 
-    <!-- قسم البيع التقني (المنتجات) -->
-    <main class="py-24 container mx-auto px-6">
-        <div class="flex justify-between items-center mb-12">
-            <h3 class="text-3xl font-black tracking-tighter" id="women">أحدث المجموعات (نساء وأطفال)</h3>
-            <div class="flex gap-2">
-                <span class="w-3 h-3 bg-pink-600 rounded-full"></span>
-                <span class="w-3 h-3 bg-zinc-200 rounded-full"></span>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- منتج 1 -->
-            <div class="product-card group bg-white p-4 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all">
-                <div class="h-80 overflow-hidden rounded-[2rem] relative mb-6">
-                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white text-[9px] px-3 py-1 rounded-full font-bold">BEST SELLER</div>
+    <!-- المنتجات المعروضة عالمياً -->
+    <main class="py-12 container mx-auto px-6">
+        <h3 class="text-2xl font-black mb-10 border-r-4 border-pink-600 pr-4">المنتجات الأكثر مبيعاً عالمياً</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- المنتج 1 -->
+            <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all group">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1539109132314-347f85417bd4?w=600" class="w-full h-full object-cover transition group-hover:scale-105">
+                    <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold">NEW COLLECTION</div>
                 </div>
-                <div class="px-2">
-                    <h4 class="font-bold text-zinc-800 mb-1">فستان السهرة المخملي</h4>
-                    <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest">Global Collection</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-pink-600 font-black text-xl">$490.00</span>
-                        <button onclick="addToCart('فستان السهرة المخملي', 490)" class="bg-zinc-900 text-white p-3 rounded-xl hover:bg-pink-600 transition">🛒</button>
+                <div class="p-6">
+                    <h4 class="font-bold text-lg mb-2">طقم النخبة الإسباني</h4>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-pink-600 font-black text-xl">$520</span>
+                        <span class="text-[10px] text-green-600 font-bold bg-green-50 px-2 py-1 rounded-md">متوفر للشحن</span>
                     </div>
+                    <button onclick="initiateSale('طقم النخبة', 520)" class="w-full bg-zinc-900 text-white py-4 rounded-xl font-bold text-xs hover:bg-pink-600 transition">اطلبي عبر الربط المباشر</button>
                 </div>
             </div>
-
-            <!-- منتج 2 (أطفال) -->
-            <div class="product-card group bg-white p-4 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all">
-                <div class="h-80 overflow-hidden rounded-[2rem] relative mb-6">
-                    <img src="https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+            <!-- المنتج 2 -->
+            <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all group">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=600" class="w-full h-full object-cover transition group-hover:scale-105">
                 </div>
-                <div class="px-2">
-                    <h4 class="font-bold text-zinc-800 mb-1">طقم الأميرات (أطفال)</h4>
-                    <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest">Royal Kids Line</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-pink-600 font-black text-xl">$185.00</span>
-                        <button onclick="addToCart('طقم الأميرات', 185)" class="bg-zinc-900 text-white p-3 rounded-xl hover:bg-pink-600 transition">🛒</button>
+                <div class="p-6">
+                    <h4 class="font-bold text-lg mb-2">فستان الأميرة الصغير</h4>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-pink-600 font-black text-xl">$145</span>
+                        <span class="text-[10px] text-green-600 font-bold bg-green-50 px-2 py-1 rounded-md">متوفر للشحن</span>
                     </div>
+                    <button onclick="initiateSale('فستان الأميرة', 145)" class="w-full bg-zinc-900 text-white py-4 rounded-xl font-bold text-xs hover:bg-pink-600 transition">اطلبي عبر الربط المباشر</button>
                 </div>
             </div>
-            
-            <!-- المزيد من المنتجات تتبع نفس النمط -->
         </div>
     </main>
 
-    <!-- محرك الإشهار (Advertising Hub) -->
-    <section id="ads-engine" class="py-24 bg-zinc-950 text-white overflow-hidden relative">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-center">
-                <h3 class="text-4xl font-black mb-4">مركز الدعاية والنمو 📈</h3>
-                <p class="text-gray-500 text-sm mb-12">استخدمي "محرك النسخ" لتوليد إعلانات احترافية تضاعف مبيعاتكِ عبر الإنترنت.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-zinc-900 p-8 rounded-[3rem] border border-zinc-800 text-right">
-                        <h4 class="font-bold text-pink-500 mb-4">مولد الإعلانات (AD COPY)</h4>
-                        <div id="ad-output" class="bg-black/50 p-4 rounded-2xl text-[11px] min-h-[100px] mb-4 text-gray-400 italic">
-                            سيظهر الإعلان المولد هنا...
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="generateAd('ar')" class="bg-zinc-800 px-4 py-2 rounded-xl text-[10px] font-bold hover:bg-pink-600 transition">إعلان عربي</button>
-                            <button onclick="generateAd('es')" class="bg-zinc-800 px-4 py-2 rounded-xl text-[10px] font-bold hover:bg-pink-600 transition">ESPAÑOL AD</button>
-                            <button onclick="copyAd()" class="bg-white text-black px-4 py-2 rounded-xl text-[10px] font-bold">نسخ الإعلان</button>
+    <!-- نظام اللوجستيات الذكي (الدفع والتتبع) -->
+    <section id="logistics" class="py-20 bg-zinc-900 text-white mt-20">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h3 class="text-3xl font-black mb-6">نظام اللوجستيات العالمي 📦</h3>
+                <p class="text-gray-400 text-sm mb-8 leading-loose">لقد قمنا بربط متجر مها بأنظمة شحن دولية تضمن لكِ وصول المنتج خلال 7 أيام عمل. الدفع يتم عبر التحويل المباشر لضمان أسرع معالجة للطلب من المصنع.</p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+                        <span class="text-2xl">💳</span>
+                        <div>
+                            <p class="text-xs font-bold">التحويل المعتمد للرقم</p>
+                            <p class="text-pink-500 font-mono text-lg">0034632684017</p>
                         </div>
                     </div>
-                    <div class="bg-zinc-900 p-8 rounded-[3rem] border border-zinc-800 flex flex-col justify-center">
-                        <h4 class="font-bold text-green-500 mb-2">إحصائيات البيع الحية</h4>
-                        <p class="text-[10px] text-gray-500 mb-4">مراقبة أداء المتجر العالمي</p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-black p-4 rounded-2xl">
-                                <span class="block text-2xl font-black text-white">4.9/5</span>
-                                <span class="text-[9px] text-gray-500 uppercase">تقييم الزبائن</span>
-                            </div>
-                            <div class="bg-black p-4 rounded-2xl">
-                                <span class="block text-2xl font-black text-white" id="live-orders">12</span>
-                                <span class="text-[9px] text-gray-500 uppercase">طلبات اليوم</span>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="bg-white text-zinc-900 p-8 rounded-[2.5rem]">
+                <h4 class="font-black text-xl mb-6 text-center">تتبع الطلب الفوري</h4>
+                <div class="space-y-4">
+                    <input type="text" placeholder="أدخل رقم الطلب أو رقم هاتفك" class="w-full p-4 bg-zinc-100 rounded-xl outline-none border focus:border-pink-500 text-sm">
+                    <button class="w-full bg-pink-600 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest">تحقق من حالة الشحن</button>
+                    <p class="text-[9px] text-gray-400 text-center">ملاحظة: تفعيل الكود يتم بعد تأكيد التحويل المالي.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- نظام اللوجستيات (Tracking & Support) -->
-    <section id="tracking" class="py-24 container mx-auto px-6">
-        <div class="bg-white rounded-[4rem] p-10 md:p-20 shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-16">
-            <div class="md:w-1/2">
-                <h3 class="text-4xl font-black mb-6 tracking-tighter">اللوجستيات والشحن 🚢</h3>
-                <ul class="space-y-6 text-sm">
-                    <li class="flex items-start gap-4">
-                        <span class="bg-green-100 text-green-600 p-2 rounded-full">✓</span>
-                        <div>
-                            <p class="font-bold">تأمين الشحنة</p>
-                            <p class="text-gray-400 text-xs">شحناتكِ مؤمنة بالكامل من المستودع إلى باب منزلك.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <span class="bg-green-100 text-green-600 p-2 rounded-full">✓</span>
-                        <div>
-                            <p class="font-bold">تتبع مباشر (Tracking)</p>
-                            <p class="text-gray-400 text-xs">بمجرد التحويل للرقم 0034632684017، ستستلمين كود التتبع.</p>
-                        </div>
-                    </li>
-                </ul>
+    <!-- بوت الإشهار العابر للمنصات (External Ad Bot) -->
+    <section class="py-20 container mx-auto px-6">
+        <div class="bg-white rounded-[3rem] p-10 shadow-xl border border-pink-50">
+            <h3 class="text-2xl font-black mb-4">مولد روابط الإشهار الذكي 🔗</h3>
+            <p class="text-gray-500 text-xs mb-8">هذا البوت يولد روابط "مغناطيسية" تجذب زوار المنصات الأخرى إلى منتجاتك.</p>
+            <div class="flex flex-wrap gap-4">
+                <button onclick="generateAILink('TikTok')" class="bg-zinc-100 px-6 py-3 rounded-xl text-[10px] font-bold hover:bg-black hover:text-white transition">رابط تيك توك</button>
+                <button onclick="generateAILink('WhatsApp')" class="bg-zinc-100 px-6 py-3 rounded-xl text-[10px] font-bold hover:bg-green-600 hover:text-white transition">رابط واتساب</button>
+                <button onclick="generateAILink('Google')" class="bg-zinc-100 px-6 py-3 rounded-xl text-[10px] font-bold hover:bg-blue-600 hover:text-white transition">رابط بحث جوجل</button>
             </div>
-            <div class="md:w-1/2 w-full">
-                <div class="bg-zinc-50 p-8 rounded-[3rem] border-2 border-dashed border-gray-200">
-                    <h4 class="font-bold mb-4 text-center">أدوات الدفع المباشر</h4>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm text-center">
-                        <p class="text-[10px] text-gray-400 uppercase mb-2">الرقم المعتمد للتحويل الفوري</p>
-                        <p class="text-2xl font-black text-pink-700 font-mono tracking-widest">0034632684017</p>
-                    </div>
-                </div>
+            <div id="linkOutput" class="mt-6 hidden p-4 bg-gray-50 rounded-xl border-2 border-dashed border-pink-200">
+                <p id="finalLink" class="text-[10px] font-mono break-all text-pink-600 font-bold"></p>
             </div>
         </div>
     </section>
 
-    <!-- فوتر احترافي -->
-    <footer class="bg-zinc-900 text-gray-500 py-20 px-6 border-t border-zinc-800">
-        <div class="container mx-auto grid md:grid-cols-4 gap-12 text-right">
-            <div class="col-span-1 md:col-span-2">
-                <h4 class="text-white font-black text-2xl mb-6">MAHA LUXURY GLOBAL</h4>
-                <p class="text-xs leading-loose max-w-sm">نحن ندمج التكنولوجيا بالموضة لنوفر لكِ تجربة تسوق فريدة من نوعها. متجرنا معتمد عالمياً ويخضع لمعايير الجودة واللوجستيات الاحترافية.</p>
-            </div>
-            <div>
-                <h5 class="text-white font-bold mb-4">روابط تقنية</h5>
-                <ul class="text-xs space-y-3">
-                    <li><a href="#" class="hover:text-pink-500">سياسة الخصوصية</a></li>
-                    <li><a href="#" class="hover:text-pink-500">شروط الاستخدام</a></li>
-                    <li><a href="#" class="hover:text-pink-500">تتبع الشحن</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-white font-bold mb-4">الدعم الفني</h5>
-                <p class="text-[10px] mb-2 font-mono">ADMIN: 0034632684017</p>
-                <div class="flex gap-4 text-xl mt-4">
-                    <span>📱</span> <span>📸</span> <span>💼</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-20 text-center text-[9px] uppercase tracking-[0.3em] font-bold">
-            © 2026 MAHA LUXURY | POWERED BY MAHA-AI CORE
-        </div>
+    <footer class="py-10 text-center border-t">
+        <p class="text-[9px] text-gray-400 uppercase tracking-widest">© 2026 Maha Luxury | AI Inter-connected Network</p>
     </footer>
 
-    <!-- نافذة الإشعارات الحية (Sales Triggers) -->
-    <div id="live-toast" class="fixed bottom-6 right-6 hidden z-[100]">
-        <div class="notification-toast bg-white shadow-2xl rounded-2xl p-4 border border-pink-100 flex items-center gap-4 max-w-[280px]">
-            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white text-xl">🛒</div>
-            <div>
-                <p class="text-[10px] font-bold text-zinc-800" id="toast-text">شخص ما من إسبانيا اشترى فستاناً الآن!</p>
-                <p class="text-[8px] text-gray-400">منذ دقيقتين</p>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // إعدادات المتجر الأساسية
-        const storeConfig = {
-            phone: "0034632684017",
-            url: "https://maha-store.github.io/Maha-store-/",
-            currency: "$"
-        };
-
-        let cartCount = 0;
-
-        // وظائف السلة
-        function addToCart(name, price) {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
-            showToast(`تمت إضافة ${name} إلى سلتكِ بنجاح!`);
-        }
-
-        // محرك الإشهار (Ad Generator)
-        function generateAd(lang) {
-            const ads = {
-                ar: `✨ فخامة عالمية بين يديكِ! استمتعي بأرقى تصاميم النساء والأطفال من "مها لوكشري".\n🚚 شحن دولي سريع وآمن لجميع الوجهات.\n💰 دفع مباشر وسهل عبر الرقم: ${storeConfig.phone}\n🛍️ تسوقي الآن: ${storeConfig.url}`,
-                es: `✨ ¡Elegancia global a tu alcance! Descubre los diseños más exclusivos para mujeres y niños en "Maha Luxury".\n🚚 Envío internacional rápido y seguro.\n💰 Pago directo fácil al: ${storeConfig.phone}\n🛍️ Compra aquí: ${storeConfig.url}`
-            };
-            const output = document.getElementById('ad-output');
-            output.innerText = ads[lang];
-            output.classList.remove('text-gray-400');
-            output.classList.add('text-pink-500', 'font-bold');
-        }
-
-        function copyAd() {
-            const text = document.getElementById('ad-output').innerText;
-            if(text.includes('سيظهر')) return alert("يرجى توليد الإعلان أولاً.");
-            navigator.clipboard.writeText(text);
-            showToast("تم نسخ الإعلان بنجاح! انشريه الآن.");
-        }
-
-        // نظام التنبيهات الحية (Social Proof)
-        const buyers = ["ماريا من مدريد", "ياسمين من دبي", "سارة من باريس", "فاطمة من طنجة", "لورا من برشلونة"];
-        function triggerLiveSale() {
-            const toast = document.getElementById('live-toast');
-            const toastText = document.getElementById('toast-text');
-            const randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
-            
-            toastText.innerText = `قامت ${randomBuyer} بشراء منتج الآن!`;
-            toast.classList.remove('hidden');
-            
-            setTimeout(() => {
-                toast.classList.add('hidden');
+        // محاكاة الربط بين البوتات
+        function simulateBotCommunication() {
+            const statuses = [
+                "MAHA-AI BRIDGE: جاري مزامنة المنتجات مع Google Shopping...",
+                "MAHA-AI BRIDGE: تم إرسال تحديث المخزون إلى منصات التواصل الاجتماعي",
+                "MAHA-AI BRIDGE: جاري جلب زوار مستهدفين من محركات البحث...",
+                "MAHA-AI BRIDGE: نظام اللوجستيات جاهز لاستلام طلبات جديدة"
+            ];
+            let i = 0;
+            setInterval(() => {
+                document.getElementById('botStatus').innerText = statuses[i];
+                i = (i + 1) % statuses.length;
+                
+                // تحديث وهمي لعدد الزوار لإعطاء انطباع بالنشاط
+                const count = document.getElementById('trafficCount');
+                let current = parseInt(count.innerText.split(': ')[1]);
+                count.innerText = `الزوار الآن: ${current + Math.floor(Math.random() * 5) - 2}`;
             }, 5000);
         }
 
-        function showToast(msg) {
-            // تنبيه بسيط للمستخدم
-            alert(msg);
+        function generateAILink(platform) {
+            const url = "https://maha-store.github.io/Maha-store-/";
+            const tracking = `?ref=maha_ai_bot_${platform.toLowerCase()}_${Date.now()}`;
+            const final = url + tracking;
+            document.getElementById('linkOutput').classList.remove('hidden');
+            document.getElementById('finalLink').innerText = `انشري هذا الرابط في ${platform}: ${final}`;
         }
 
-        // تشغيل المحركات عند التحميل
-        window.onload = () => {
-            // محاكاة طلبات حية لزيادة ثقة الزبون
-            setInterval(triggerLiveSale, 15000);
-            
-            // تحديث إحصائيات وهمية للنمو
-            setInterval(() => {
-                const orders = document.getElementById('live-orders');
-                orders.innerText = parseInt(orders.innerText) + 1;
-            }, 60000);
-        };
+        function initiateSale(item, price) {
+            const phone = "34632684017";
+            const text = `مرحباً Maha Luxury، لقد جذبني بوت الإشهار لطلب: ${item} بسعر $${price}. يرجى تزويدي ببيانات التحويل للشحن الدولي.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        window.onload = simulateBotCommunication;
     </script>
 </body>
 </html>
